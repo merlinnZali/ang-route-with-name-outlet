@@ -1,0 +1,24 @@
+
+<div class="d-flex flex-row justify-content-evenly mt-2">
+    <a class="p-2" routerLinkActive="active" routerLink="users">Users</a>
+    <a class="p-2" routerLink="products">Products</a>
+    <a class="p-2" >Posts</a>
+</div>
+
+<main class="content d-flex">
+    <aside class="sidebar w-20">
+        <router-outlet></router-outlet>
+    </aside>
+    <section class="details w-80">
+        <!-- on peut avoir une page avec tabulation
+        chaque tab est une sous page qui a un tableau d element.
+        au clic sur continuer apres avoir selectionner un element du tableau
+        dans une sous page on aplique une sous route like users:id qui
+        va ouvrir une nouvelle page
+        -->
+        <router-outlet (activate)="isShownButon = true" (deactivate)="isShownButon = false" name="details"></router-outlet>
+        <button [hidden]="!isShownButon" 
+        [routerLink]="['', {outlets: {details: null }}]">close</button>
+    </section>
+</main>
+
